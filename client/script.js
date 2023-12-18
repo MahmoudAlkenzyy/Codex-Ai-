@@ -56,7 +56,7 @@ const handleSubmit = async (e) => {
 
     // user chatstripe
     chatContainer.innerHTML += chateStripe(false, date.get('prompet'));
-    console.log(chateStripe(false, date.get('prompet')), chatContainer);
+
     form.reset();
 
     //ai chatestripe
@@ -68,14 +68,14 @@ const handleSubmit = async (e) => {
     loader(messageDiv);
 
     //fetch data
-    const response = await fetch('https://codex-ai-qinx.onrender.com/', {
+    const response = await fetch('http://localhost:5000/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({ prompt: date.get('prompet') }),
     });
-
+    console.log(response);
     clearInterval(loadInterval);
     messageDiv.innerHTML = '';
 
@@ -88,7 +88,8 @@ const handleSubmit = async (e) => {
     } else {
         const err = response.text();
         messageDiv.innerHTML = 'Something went wrong';
-        alert(err);
+        alert(JSON.stringify(err));
+        console.log({ parsedData });
     }
 };
 
@@ -97,5 +98,4 @@ form.addEventListener('keyup', (e) => {
     if (e.keyCode === 13) {
         handleSubmit(e);
     }
-    console.log('cascasc');
 });
