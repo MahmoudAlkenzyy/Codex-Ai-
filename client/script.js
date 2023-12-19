@@ -68,13 +68,14 @@ const handleSubmit = async (e) => {
     loader(messageDiv);
 
     //fetch data
-    const response = await fetch('https://codex-ai-qinx.onrender.com/', {
+    const response = await fetch('http://localhost:5000/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({ prompt: date.get('prompet') }),
     });
+    console.log(response);
 
     clearInterval(loadInterval);
     messageDiv.innerHTML = '';
