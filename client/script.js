@@ -3,6 +3,8 @@ import user from './assets/user.svg';
 const form = document.querySelector('form');
 const chatContainer = document.querySelector('#chat_container');
 let loadInterval;
+
+/* To Display Loading Dots */
 function loader(element) {
     element.textContent = '';
 
@@ -13,6 +15,7 @@ function loader(element) {
         }
     }, 300);
 }
+/* To Display the out put by typing effict */
 function typed(element, text) {
     let index = 0;
 
@@ -26,7 +29,7 @@ function typed(element, text) {
         }
     }, 20);
 }
-
+//generate uniqe id
 function generateUniqeId() {
     const timestamp = Date.now();
     const randomNumber = Math.random();
@@ -67,8 +70,8 @@ const handleSubmit = async (e) => {
     const messageDiv = document.getElementById(uniqueId);
     loader(messageDiv);
 
-    //fetch data
-    const response = await fetch('https://codex-ai-qinx.onrender.com/', {
+    // fetch data
+    const response = await fetch('http://localhost:5000/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -100,3 +103,14 @@ form.addEventListener('keyup', (e) => {
         handleSubmit(e);
     }
 });
+
+// fetch('http://localhost:5001/')
+//     .then((response) => response.json())
+//     .then((data) => {
+//         // Handle the retrieved quiz data
+//         console.log(data);
+//         // You can perform further actions with the data, e.g., render it on the page
+//     })
+//     .catch((error) => {
+//         console.error('Error fetching quiz data:', error);
+//     });
